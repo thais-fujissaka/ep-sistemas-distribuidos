@@ -1,0 +1,60 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+package grpctests;
+
+service TestsRPC{
+
+    /* Define o método RPC responsável por receber como parâmetro e ter como valor de retorno uma string */
+    rpc GetServerResponse(Message) returns (MessageResponse);
+
+    /* Define o método RPC responsável por receber como parâmetro e ter como valor de retorno void/mensagem vazia */
+    rpc GetsVoid(parameters) returns (google.protobuf.Empty);
+
+    /* Define o método RPC responsável por receber como parâmetro e ter como valor de retorno um long */
+    rpc GetsLong(parameters) returns (Long_Response);
+
+    /* Define o método RPC responsável por receber como parâmetros 8 valores de tipo long e retornar um valor do tipo long */
+    rpc GetsEightLongs (parameters) returns (Long_Response);
+
+    /* Define o método RPC responsável por receber como parâmetro um tipo complexo (Classe) e retornar um valor de tipo complexo (Classe) */
+    rpc ProcessClass (ProcessClassRequest) returns (ProcessClassResponse);
+
+}
+
+/* Define a estrutura da mensagem do tipo string */
+message Message {
+    string message = 1;
+}
+
+/* Define a estrutura da mensagem de retorno do tipo string */
+message MessageResponse {
+    string message = 1;
+}
+
+/* Define a estrutura da mensagem do tipo long e dos diversos valores long */
+message parameters {
+    int64 number = 1;
+    repeated int64 long_values = 2;
+}
+
+/* Define estrutura da mensagem de retorno do tipo long */
+message Long_Response {
+    int64 result = 1;
+}
+
+/* Define a estrutura da mensagem do tipo complexo (Classe) */
+message MyClass {
+    int32 value = 1;
+}
+
+/* Define a estrutura da mensagem que instancia a classe criada */
+message ProcessClassRequest {
+    MyClass instance = 1;
+}
+
+/* Define a estrutura da mensagem de retorno do tipo complexo (Classe) */
+message ProcessClassResponse {
+    int32 result = 1;
+}
