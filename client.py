@@ -6,7 +6,7 @@ from google.protobuf.empty_pb2 import Empty
 
 class TesterClient(object):
     def __init__(self):
-        self.host = 'localhost'
+        self.host = '192.168.0.101'
         self.server_port = 50051
 
         # Inicia o canal
